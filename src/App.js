@@ -1,9 +1,10 @@
 import React from 'react';
 import Hello from './Hello';
 import './App.css';
-import Wrapper from './Wrapper.js';
+import Wrapper from './Wrapper';
+import Counter from './Counter';
+import InputSample from './InputSample';
 
-{/* 주석 엄청 불편하게 다는군 */}
 function App() {
   const name = 'helloworld';
   const style = {
@@ -13,12 +14,22 @@ function App() {
     padding: '1rem'
   }
   return (
-    <Wrapper>
-      <Hello name="이것은프롭스" color="red" isSpecial />
-      <Hello />
-      <div style = {style}>{name}</div>
-      <div className="gray-box"></div>
-    </Wrapper>
+    <>
+      <Wrapper>
+        <Hello name="이것은프롭스" color="red" isSpecial />
+        <Hello />
+        <div style = {style}>{name}</div>
+        <div className="gray-box"></div>
+      </Wrapper>
+
+      <Wrapper>
+        <Counter />
+      </Wrapper>
+      
+      <Wrapper>
+        <InputSample />
+      </Wrapper>
+    </>
   );
 }
 
