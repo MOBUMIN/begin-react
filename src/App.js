@@ -1,4 +1,4 @@
-import React, { useRef, useState, useMemo } from 'react';
+import React, { useRef, useState, useMemo, useCallback } from 'react';
 import Hello from './Hello';
 import './App.css';
 import Wrapper from './Wrapper';
@@ -44,13 +44,13 @@ function AppUser(){
     username: '', email: ''
   });
   const {username, email} = inputs;
-  const onChange=(e)=>{
+  const onChange= useCallback((e)=>{
     const {name, value} = e.target;
     setInputs({
       ...inputs,
       [name]:value
     });
-  };
+  }, []);
   const [users, setUsers]= useState([
     {
       id:1,username:'velopert',email:'p@gmail.com',active:true
@@ -63,30 +63,30 @@ function AppUser(){
     }
   ]);
   const nextId = useRef(4);
-  const onCreate = () => {
+  const onCreate = useCallback(() => {
     const user={
       id: nextId.current,username,email
     };
-    setUsers([...users, user]);
-    // setUsers(users.concat(user));
+    //setUsers([...users, user]);
+     setUsers(users => users.concat(user));
     setInputs({
       username: '', email: ''
     });
     nextId.current+=1;
-  };
+  }, [username, email]);
   
-  const onRemove = id => {
+  const onRemove = useCallback( id => {
     // 일치하는 user.id를 제외하고 새로운 배열을 만듦
-    setUsers(users.filter(user=>user.id!==id));
-  };
+    setUsers(users=> users.filter(user=>user.id!==id));
+  }, []);
 
-  const onToggle = id =>{
-    setUsers(
+  const onToggle = useCallback(id =>{
+    setUsers(users=>
       users.map(user=>
         user.id === id ? {...user,active: !user.active}:user
         )
     );
-  };
+  }, []);
   const count = useMemo(()=>countActiveUsers(users),[users]);
   return(
     <>
