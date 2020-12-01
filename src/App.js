@@ -8,6 +8,8 @@ import InputSample from './InputSample';
 import UserList from './UserList';
 import CreateUser from './CreateUser';
 import produce from 'immer';
+import ErrorCheck from './ErrorCheck';
+import ErrorBoundary from './ErrorBoundary';
 
 // ReactDOM.render(<Counter />, document.getElementById('root'));
 function App() {
@@ -17,6 +19,9 @@ function App() {
     color: 'aqua',
     fontSize:24,
     padding: '1rem'
+  };
+  const variable = {
+    check: 1, name: 'error'
   };
   return (
     <>
@@ -37,6 +42,12 @@ function App() {
 
       <Wrapper>
         <AppUser />
+      </Wrapper>
+
+      <Wrapper>
+        <ErrorBoundary>
+          <ErrorCheck variable={variable} />
+        </ErrorBoundary>
       </Wrapper>
     </>
   );

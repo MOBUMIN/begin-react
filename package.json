@@ -4,6 +4,9 @@
   "private": true,
   "homepage": "http://mobumin.github.io/begin-react",
   "dependencies": {
+    "@sentry/browser": "^5.27.6",
+    "@sentry/react": "^5.27.6",
+    "@sentry/tracing": "^5.27.6",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
