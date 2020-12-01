@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-function Hello({color, name, isSpecial}) {
-  return <div style={{ color }}>
-      { isSpecial && <b>*</b>}
-      헬로월드 {name}
-      </div>
+class Hello extends Component{
+    static defaultProps = {
+        name: '노프롭스'
+    }
+    render(){
+        const {color,name,isSpecial} = this.props;
+        return(
+            <div style = {{color}}>
+                {isSpecial && <b>*</b>}
+                Hello {name}
+            </div>
+        );
+    }
 }
 
-Hello.defaultProps={
-    name: '노프롭스'
-}
 
 export default Hello;
