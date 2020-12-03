@@ -1,7 +1,7 @@
 import React, { useMemo, useReducer } from 'react';
 //import ReactDOM from 'react-dom';
 import Hello from './Hello';
-import './App.css';
+import './App.scss';
 import Wrapper from './Wrapper';
 import Counter from './Counter';
 import InputSample from './InputSample';
@@ -10,6 +10,7 @@ import CreateUser from './CreateUser';
 import produce from 'immer';
 import ErrorCheck from './ErrorCheck';
 import ErrorBoundary from './ErrorBoundary';
+import Button from './components/Button';
 
 // ReactDOM.render(<Counter />, document.getElementById('root'));
 function App() {
@@ -48,6 +49,36 @@ function App() {
         <ErrorBoundary>
           <ErrorCheck variable={variable} />
         </ErrorBoundary>
+      </Wrapper>
+
+      <Wrapper>
+        <div className="App">
+          <div className="buttons">
+            <Button size="large" onClick={()=>console.log('click!')}>BUTTON</Button>
+            <Button>BUTTON</Button>
+            <Button size="small">BUTTON</Button>
+          </div>
+          <div className="buttons">
+            <Button size="large" color="orange">BUTTON</Button>
+            <Button color="orange">BUTTON</Button>
+            <Button size="small" color="orange">BUTTON</Button>
+          </div>
+          <div className="buttons">
+            <Button size="large" color="green">BUTTON</Button>
+            <Button color="green">BUTTON</Button>
+            <Button size="small" color="green">BUTTON</Button>
+          </div>
+          <div className="buttons">
+            <Button size="large" color="blue" outline>BUTTON</Button>
+            <Button color="orange" outline>BUTTON</Button>
+            <Button size="small" color="green" outline>BUTTON</Button>
+          </div>
+          <div className="buttons">
+            <Button size="large" color="blue" fullWidth>BUTTON</Button>
+            <Button color="orange" fullWidth>BUTTON</Button>
+            <Button size="small" color="green" fullWidth>BUTTON</Button>
+          </div>
+        </div>
       </Wrapper>
     </>
   );
