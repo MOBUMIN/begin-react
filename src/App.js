@@ -1,4 +1,4 @@
-import React, { useMemo, useReducer } from 'react';
+import React, { useMemo, useReducer, useState } from 'react';
 //import ReactDOM from 'react-dom';
 import Hello from './Hello';
 import './App.scss';
@@ -11,6 +11,7 @@ import produce from 'immer';
 import ErrorCheck from './ErrorCheck';
 import ErrorBoundary from './ErrorBoundary';
 import Button from './components/Button';
+import CheckBox from './components/CheckBox';
 
 // ReactDOM.render(<Counter />, document.getElementById('root'));
 function App() {
@@ -80,6 +81,9 @@ function App() {
           </div>
         </div>
       </Wrapper>
+      <Wrapper>
+        <Checking />
+      </Wrapper>
     </>
   );
 }
@@ -145,5 +149,22 @@ function countActiveUsers(users){
 
 export const UserDispatch = React.createContext(null);
 
+function Checking(){
+  const [check, setCheck] = useState(false);
+  const onChange = e => {
+    setCheck(e.target.checked);
+  };
+  return(
+    <div>
+      <CheckBox onChange={onChange} checked={check}>
+        다음 약관에 모두 동의
+      </CheckBox>
+      <p>
+        <b>check: </b>
+        {check? 'true' : 'false'}
+      </p>
+    </div>
+  )
+}
 
 export default App;
