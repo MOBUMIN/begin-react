@@ -12,6 +12,9 @@ import ErrorCheck from './ErrorCheck';
 import ErrorBoundary from './ErrorBoundary';
 import Button from './components/Button';
 import CheckBox from './components/CheckBox';
+import styled, { css, ThemeProvider } from 'styled-components';
+import SButton from './components/SButton';
+import Dialog from './components/Dialog';
 
 // ReactDOM.render(<Counter />, document.getElementById('root'));
 function App() {
@@ -25,6 +28,10 @@ function App() {
   const variable = {
     check: 1, name: 'error'
   };
+  const [dialog, setDialog] = useState(false);
+  const onClick = () =>{ setDialog(true); };
+  const onConfirm = () =>{ setDialog(false); };
+  const onCancel = () =>{ setDialog(false); };
   return (
     <>
       <Wrapper>
@@ -83,6 +90,55 @@ function App() {
       </Wrapper>
       <Wrapper>
         <Checking />
+      </Wrapper>
+      <Wrapper>
+        <Circle color="blue" huge />
+      </Wrapper>
+      <Wrapper>
+        <ThemeProvider theme={{
+          palette:{
+            blue:'#228be6',
+            gray:'#495057',
+            pink:'#f06595'
+          }
+        }}
+        >
+          <ButtonGroup>
+            <SButton size="large">Button</SButton>
+            <SButton>Button</SButton>
+            <SButton size="small">Button</SButton>
+          </ButtonGroup>
+          <ButtonGroup>
+            <SButton color="gray" size="large">Button</SButton>
+            <SButton color="gray">Button</SButton>
+            <SButton color="gray" size="small">Button</SButton>
+          </ButtonGroup>
+          <ButtonGroup>
+            <SButton color="pink" size="large">Button</SButton>
+            <SButton color="pink">Button</SButton>
+            <SButton color="pink" size="small">Button</SButton>
+          </ButtonGroup>
+          <ButtonGroup>
+            <SButton size="large" outline>Button</SButton>
+            <SButton color="gray" outline>Button</SButton>
+            <SButton color="pink" size="small" outline onClick={onClick}>Dialog</SButton>
+          </ButtonGroup>
+          <ButtonGroup>
+            <SButton size="large" fullWidth>Button</SButton>
+            <SButton color="gray" fullWidth>Button</SButton>
+            <SButton color="pink" size="small" fullWidth>Button</SButton>
+          </ButtonGroup>
+          <Dialog
+          title = "정말 삭제?"
+          confirmText="삭제"
+          cancelText="취소"
+          onConfirm={onConfirm}
+          onCancel={onCancel}
+          visible={dialog}
+          >
+            정말로 데이터 삭제 ? 
+          </Dialog>
+        </ThemeProvider>
       </Wrapper>
     </>
   );
@@ -166,5 +222,23 @@ function Checking(){
     </div>
   )
 }
+
+const Circle = styled.div`
+  width:5rem;
+  height:5rem;
+  background:${props=>props.color || 'black'};
+  border-radius:50%;
+  ${props=>
+  props.huge && css`
+    width:10rem;
+    height:10rem;
+  `}
+`;
+
+const ButtonGroup = styled.div`
+& + &{
+  margin-top: 1rem;
+}
+`;
 
 export default App;
